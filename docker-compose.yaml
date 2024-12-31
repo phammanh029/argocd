@@ -25,19 +25,6 @@ services:
     volumes:
       - '/var/run/docker.sock:/var/run/docker.sock'
 
-  # Argo CD (Single Service)
-  argocd:
-    image: 'argoproj/argocd:v2.6.15'
-    container_name: argocd
-    restart: always
-    ports:
-      - '8080:8080'  # Argo CD Web UI
-    command: [
-      "argocd-server",
-      "--staticassets", "/shared/app",
-      "--repo-server", ":8081"
-    ]
-
 volumes:
   gitlab-config:
   gitlab-data:
