@@ -1,0 +1,26 @@
+gitea:
+  admin:
+    username: admin
+    password: admin123
+    email: admin@example.com
+
+  config:
+    database:
+      DB_TYPE: sqlite3
+      PATH: /data/gitea/gitea.db
+
+  persistence:
+    enabled: false  # No persistence for testing purposes.
+
+service:
+  http:
+    type: NodePort  # Expose Gitea for local access.
+
+postgresql:
+  enabled: false  # Disable PostgreSQL.
+
+memcached:
+  enabled: false  # Disable Memcached.
+
+redis:
+  enabled: false  # Disable Redis.

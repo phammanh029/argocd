@@ -8,12 +8,14 @@
 3. `kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml`
 4. export service of argo cd:
 `kubectl port-forward svc/argocd-server -n argocd 8080:443`
-5. Add gitlab
+5. Add gitea
 ```
-helm repo add gitlab https://charts.gitlab.io/
+helm repo add gitea-charts https://dl.gitea.io/charts/
 helm repo update
-kubectl create namespace gitlab
-helm install gitlab gitlab/gitlab -f gitlab/values.yaml --namespace gitlab
+kubectl create namespace gitea
+helm install gitea gitea-charts/gitea --namespace gitea -f gitea/values.yaml
+kubectl port-forward svc/gitea-http -n gitea 3000:3000
+
 ```
 6. Get password for argocd
 `kubectl get secret -n argocd argocd-initial-admin-secret -o jsonpath='{.data.password}' | base64 -d`

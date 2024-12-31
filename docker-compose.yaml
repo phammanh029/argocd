@@ -1,31 +1,13 @@
 version: "3.8"
 
 services:
-  # GitLab Service
-  gitlab:
-    image: 'gitlab/gitlab-ce:latest'
-    container_name: GitLab
+  server:
+    image: docker.io/gitea/gitea:1.22.6
+    container_name: gitea
+    environment:
+      - USER_UID=1000
+      - USER_GID=1000
     restart: always
     ports:
-      - '4567:80'  # GitLab HTTP
-      - '3122:22'  # GitLab SSH
-    environment:
-      GITLAB_OMNIBUS_CONFIG: |
-        external_url 'http://localhost:4567'
-    volumes:
-      - gitlab-config:/etc/gitlab
-      - gitlab-data:/var/opt/gitlab
-      - gitlab-logs:/var/log/gitlab
-
-  # GitLab Runner Service
-  runner:
-    image: 'gitlab/gitlab-runner:latest'
-    container_name: gitlab-runner
-    restart: always
-    volumes:
-      - '/var/run/docker.sock:/var/run/docker.sock'
-
-volumes:
-  gitlab-config:
-  gitlab-data:
-  gitlab-logs:
+      - "3000:3000"
+      - "222:22"
